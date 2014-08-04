@@ -4,7 +4,7 @@ These scripts will grab a folder of your choosing from gmail and insert it into 
 
 ```create table emails (id int primary key auto_increment not null, sender text, subject text, date text, message text);```
 
-***I'll switch these data types soon, I'm just lazy so they're all 'text' right now...***
+I'll switch these data types soon, I'm just lazy so they're all 'text' right now...
 
 Then, open up ```form.php``` in your browser.
 
