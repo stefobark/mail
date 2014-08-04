@@ -1,6 +1,6 @@
 Collect your email
 ====
-These scripts will grab a folder of your choosing from gmail and insert it into a MySQL table. I'm doing this, because, ultimately, I want to play around with my emails using Sphinx.
+These scripts will grab a folder of your choosing from gmail and insert it into a MySQL table. I'm doing this, because, ultimately, I want to play around with my emails using Sphinx. To get started, download these files and open up **form.php** in your browser.
 
 ###form.php
 
