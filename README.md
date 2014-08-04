@@ -12,7 +12,7 @@ This will present a list of folders from your gmail account. Copy and paste one 
 
 ###gmail.php
 
-This brings together your authorization details, gets emails, and inserts the sender name, subject, date and content into MySQL. Depending on the size of your mailbox, it could take a while.
+This brings together your authorization details, gets emails, and inserts the sender name, subject, date and content into MySQL. Depending on the size of your mailbox, it could take a very long time...
 
 ###gmail.conf
 This is the Sphinx configuration file used to index a table with 'sender', 'subject', 'date', and 'message' fields. It connects to a database named 'test' on 127.0.0.1:9306 with the 'root' user and no password. It uses the field/string data type. So, it's fulltext indexed but also stored as a string attribute (so, when searching Sphinx, we'll get text content in the result set.. otherwise, Sphinx ditches the actual text content with fulltext fields).
