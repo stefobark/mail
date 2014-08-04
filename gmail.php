@@ -6,23 +6,16 @@ ini_set('display_errors', 1);
 $mysqli  = mysqli_connect('127.0.0.1', 'root', '', 'test', '3306');
 
 //Your gmail email address and password
-$username = 'someone@gmail.com';
-$password = 'password';
-
-//Which folders or label do you want to access? - Example: INBOX, All Mail, Trash, labelname 
-//Note: It is case sensitive
-$imapmainbox = "contact-us";
+$username = $_POST["username"];
+$password = $_POST["password"];
 
 //Select messagestatus as ALL or UNSEEN which is the unread email
 $messagestatus = "ALL";
 
 //-------------------------------------------------------------------
 
-//Gmail Connection String
-$imapaddress = "{imap.gmail.com:993/imap/ssl}";
-
 //Gmail host with folder
-$hostname = $imapaddress . $imapmainbox;
+$hostname = $_POST["folder"];
 
 //Open the connection
 $connection = imap_open($hostname,$username,$password) or die('Cannot connect to Gmail: ' . imap_last_error());
@@ -43,7 +36,7 @@ if($emails) {
   //loop through every email in the inbox
   foreach($emails as $email_number) {
     
-	//get some header info for subject, from, and date.. imag_fetch_overview (which was in the example I used for this) just returns true or false
+	//get some header info for subject, from, and date.. imap_fetch_overview (which was in the example I used for this) just returns true or false
     $headerinfo = imap_headerinfo($connection, $email_number);
 
 
@@ -59,11 +52,26 @@ if($emails) {
 	$fmessage = quoted_printable_decode($message);
 
 //This is where you would want to start parsing your emails, send parts of the email into a database or trigger something fun to happen based on the emails.
-$mysqli->query("INSERT INTO emails (sender, subject, date, message) VALUES ('$from','$subject', '$date', '$fmessage')");
-printf("Affected rows (INSERT): %d<br>", $mysqli->affected_rows);
+
+/* Prepared statement, stage 1: prepare */
+if (!($stmt = $mysqli->prepare("INSERT INTO emails (sender, subject, date, message) VALUES ('?','?', '?', '?')"))) {
+    echo "Prepare failed: (" . $mysqli->errno . ") " . $mysqli->error;
+}
+
+if (!$stmt->bind_param("ssss", $from, $subject, $date, $fmessage)) {
+    echo "Binding parameters failed: (" . $stmt->errno . ") " . $stmt->error;
+}
+
+if (!$stmt->execute()) {
+    echo "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
+}
+
+//$mysqli->query("INSERT INTO emails (sender, subject, date, message) VALUES ('$from','$subject', '$date', '$fmessage')");
+//printf("Affected rows (INSERT): %d<br>", $mysqli->affected_rows);
   }  
 } 
 
 // close the connection
 imap_close($connection);
+
 ?>
