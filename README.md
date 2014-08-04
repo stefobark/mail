@@ -10,7 +10,7 @@ Then, open up ```form.php``` in your browser.
 
 ###form.php
 
-This will ask you for your email and password, then send you to folders.php, where it will connect to your mailbox and show you a list of available folders.
+This will ask you for your email and password, then send you to ```folders.php```, where it will connect to your mailbox and show you a list of available folders.
 
 ###folders.php
 
