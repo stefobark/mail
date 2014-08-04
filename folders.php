@@ -25,7 +25,7 @@ echo "</ul><br><br>";
 echo "Now, copy and paste one of these folder names (the whole string) into this field:<br><br>"; 
 
 echo <<<END
-<form method="POST" action="gmail2.php">
+<form method="POST" action="gmail.php">
   <h1>folder: </h1>
   <input type="text" name="folder" value=""/>
   <p>
