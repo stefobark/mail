@@ -34,7 +34,8 @@ echo <<<END
   <input type="submit"/>
 </form>
 <hr><br>
-After hitting 'submit' emails will start being inserted. Remember to <strong>edit the db connection parameters</strong> 
+After hitting 'submit' emails will start being inserted. Remember to <br>
+<strong>edit the db connection parameters</strong> 
 to match your setup. This next step could take a while. <br>
 If you're curious, and want to make sure things are happening, <br>
 open up the command line interface and select from the 'emails' table. You'll see it growing.
