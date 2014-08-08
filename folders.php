@@ -20,7 +20,8 @@
   </head>
   <body role="document">
 <?php
-
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 session_start();
 $host = "{imap.gmail.com:993/imap/ssl}";
 $_SESSION['username'] = $_POST["username"];
