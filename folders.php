@@ -20,11 +20,14 @@
   </head>
   <body role="document">
 <?php
+
+session_start();
 $host = "{imap.gmail.com:993/imap/ssl}";
-$user = $_POST["username"];
-$pass = $_POST["password"];
+$_SESSION['username'] = $_POST["username"];
+$_SESSION['password'] = $_POST["password"];
  
-if ($mbox=imap_open( $host, $user, $pass ))
+
+if ($mbox=imap_open( $host, $_SESSION['username'], $_SESSION['password'] ))
 {
 $imap_obj = imap_check($mbox);
 echo "  <div class='container'>
@@ -61,19 +64,11 @@ echo "<h3>IMAP LIST OF FOLDERS</h3>";
 $folders = imap_list($mbox, $host, "*");
 echo "<ul>";
 foreach ($folders as $folder) {
-echo '<li><a href="mail.php?folder=' . $folder . '&func=view">' . imap_utf7_decode($folder) . '</a></li>';
+echo '<li><a href="gmail.php?folder=' . $folder . '">' . imap_utf7_decode($folder) . '</a></li>';
 }
 echo "</ul>";
-echo "</div><div class='col-md-6'><h3 class='form-signin-heading'>Now, copy and paste one of these folder names (the whole string) into this field:</h3>"; 
 
 echo <<<END
-<form method="POST" action="gmail.php">
-  <input type="text" class="form-control" placeholder="folder string" name="folder" value=""/>
-  <p>
-  <input type="hidden" class="form-control" name="username" value="$user" />
-  <input type="hidden" class="form-control" name="password" value="$pass" />
-  <button class="btn btn-lg btn-primary btn-block" type="submit">Go</button>
-</form>
 
 <div class="well">
 <p>
