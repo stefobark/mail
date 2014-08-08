@@ -2,7 +2,8 @@ Collect your email
 ====
 These scripts will grab a folder of your choosing from gmail and insert it into a MySQL table. **Be sure that the PHP IMAP extension is enabled.**
 
-I started learning how to do this using [this example](http://www.jazzerup.com/google-php-parsing-gmail-imap-email/), but I've changed a few things. I'm doing this, because, ultimately, I want to play around with my emails using Sphinx. Also, I wrote more about my very first steps [here](http://sphinxish.blogspot.com/2014/07/sphinx-searches-gmail-messages.html)
+####Getting Started
+I started learning how to do this using [this example](http://www.jazzerup.com/google-php-parsing-gmail-imap-email/). Check it out. I'm doing this, because, ultimately, I want to play around with my emails using Sphinx. Also, I wrote more about my very first steps [here](http://sphinxish.blogspot.com/2014/07/sphinx-searches-gmail-messages.html).
 
 To get started, download these files, create a table with 'id', 'sender', 'subject', 'date' and 'message' fields. ```gmail.php``` will expect those names. Then, open up ```form.php``` in your browser.
 
