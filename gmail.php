@@ -20,8 +20,8 @@
   </head>
   <body role="document">
 <?php
-error_reporting(E_ALL);
 ini_set('display_errors', 1);
+session_start();
 session_start();
 //connect to mysql
 $mysqli  = mysqli_connect('127.0.0.1', 'root', '', 'test', '3306');
@@ -36,7 +36,7 @@ $messagestatus = "ALL";
 //-------------------------------------------------------------------
 
 //Gmail host with folder
-$hostname = $_GET["folder"];
+$hostname = $_POST["folder"];
 
 //Open the connection
 $connection = imap_open($hostname,$username,$password) or die('Cannot connect to Gmail: ' . imap_last_error());
@@ -78,7 +78,7 @@ if($emails) {
 
 	<div class='container'>
 	<div class='col-md-6'>
-	<h2>Inserting:</h2><br><br>
+	<h4>Inserting:<br><br>
 	<h4>Sender:</h4>  $from <br><br>
 	<h4>Subject:</h4> $subject <br><br>
 	<h4>Date:</h4> $date <br><br>
