@@ -26,9 +26,11 @@ session_start();
 $host = "{imap.gmail.com:993/imap/ssl}";
 $_SESSION['username'] = $_POST["username"];
 $_SESSION['password'] = $_POST["password"];
+ $user=$_SESSION['username'];
+ $pass=$_SESSION['password'];
  
 
-if ($mbox=imap_open( $host, $_SESSION['username'], $_SESSION['password'] ))
+if ($mbox=imap_open( $host, $user, $pass ))
 {
 $imap_obj = imap_check($mbox);
 echo "  <div class='container'>
@@ -65,12 +67,18 @@ echo "<h3>IMAP LIST OF FOLDERS</h3>";
 $folders = imap_list($mbox, $host, "*");
 echo "<ul>";
 foreach ($folders as $folder) {
-echo '<li><a href="gmail.php?folder=' . $folder . '">' . imap_utf7_decode($folder) . '</a></li>';
+echo "<li> $folder </li>";
 }
 echo "</ul>";
 
-echo <<<END
-
+echo "Now, copy and paste one of these folder names (the whole string) into this field:<br><br>"; 
+echo <<<HERE
+<form method="POST" action="gmail.php">
+<h1>folder: </h1>
+	<input type="text" name="folder" value=""/>
+   <input type="hidden" class="form-control" name="username" value="$user" />
+	<input type="hidden" class="form-control" name="password" value="$pass" />
+	<input type=submit value="go"/>
 <div class="well">
 <p>
 After hitting 'Go' emails will start being inserted. <br<br>
@@ -84,7 +92,8 @@ open up the command line interface and select from the 'emails' table.
 </div>
 </div>
 </div>
-END;
+HERE;
+
 imap_close($mbox);
 
 ?>
